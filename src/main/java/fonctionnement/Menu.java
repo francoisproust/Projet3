@@ -58,4 +58,13 @@ public class Menu {
         }
         return mode;
     }
+
+    public void finDePartie(){
+        int choix;
+        System.out.println("Que souhaitez-vous faire?");
+        System.out.println("1 : Rejouer au même jeu");
+        System.out.println("2 : Lancer un autre jeu");
+        System.out.println("3 : Quitter l'application");
+        choix = sc.nextInt();
+    }
 }
