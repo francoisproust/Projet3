@@ -1,37 +1,43 @@
 package jeu;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public abstract class Jeu {
-    Scanner sc = new Scanner(System.in);
+    private int nbEssai;
+    private int difficulte;
 
-    public ArrayList<Integer> genererNombre(int difficulte){
-        ArrayList<Integer> combinaison = new ArrayList();
-        for(int i = 0; i < difficulte; i++){
-            int nombre = (int) (Math.random()*(10-0)); //on génère un nombre entre 0 et 10
-            combinaison.add(i,nombre);
-            System.out.print(combinaison.get(i));
-        }
-        System.out.println();
-        return combinaison;
+    public Jeu(int nbEssai,int difficulte){
+        this.difficulte = difficulte;
+        this.nbEssai = nbEssai;
     }
-
-    public ArrayList<Integer> recupererProposition(int difficulte){
-        System.out.print("Proposition : ");
-        String valeurRecuperer = sc.next();
-        ArrayList<Integer> proposition = new ArrayList();
-        for(int i =0;i<difficulte;i++){
-            proposition.add(i,Character.getNumericValue(valeurRecuperer.charAt(i)));
-        }
-        return proposition;
-    }
-
-    public abstract void challengeur();
 
     public abstract void defenseur();
 
+    public abstract void challengeur();
+
     public abstract void duel();
 
-    public abstract boolean comparaison(ArrayList<Integer> combinaison, ArrayList<Integer> combinaisonProposee, int difficulte);
+    public abstract String genererCombinaison(int difficulte);
+
+    public abstract boolean egalite(String combinaison, String proposition);
+
+    public abstract String reponse(String combinaison, String proposition);
+
+    public abstract String proposition();
+
+    public abstract boolean propositionEstNumerique(String proposition);
+
+    public int getNbEssai() {
+        return nbEssai;
+    }
+
+    public void setNbEssai(int nbEssai) {
+        this.nbEssai = nbEssai;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+
+    public void setDifficulte(int difficulte) {
+        this.difficulte = difficulte;
+    }
 }

@@ -1,15 +1,13 @@
 package fonctionnement;
 
-import jeu.Jeu;
 import jeu.Mastermind;
 import jeu.RecherchePlusMoins;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class Deroulement {
-    String choixJeu;
-    String modeJeu;
+    private String choixJeu;
+    private String modeJeu;
+    private int nbEssai;
+    private int difficulte;
     public void start() {
         lancerMenu();
         creerJeu();
@@ -24,7 +22,7 @@ public class Deroulement {
 
     private void creerJeu(){
         if (choixJeu.equals("Recherche")){
-            RecherchePlusMoins partie = new RecherchePlusMoins();
+            RecherchePlusMoins partie = new RecherchePlusMoins(10, 2);
             switch (modeJeu){
                 case "challenger":
                     partie.challengeur();
@@ -37,16 +35,16 @@ public class Deroulement {
                     break;
             }
         }else {
-            Mastermind partie = new Mastermind();
+            Mastermind partie = new Mastermind(nbEssai, difficulte);
             switch (modeJeu){
                 case "challengeur":
-
+                    partie.challengeur();
                     break;
                 case "defenseur":
-
+                    partie.defenseur();
                     break;
                 case "duel":
-
+                    partie.duel();
                     break;
             }
         }
