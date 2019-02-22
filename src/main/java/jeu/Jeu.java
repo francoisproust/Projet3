@@ -3,10 +3,12 @@ package jeu;
 public abstract class Jeu {
     private int nbEssai;
     private int difficulte;
+    private String modeJeu;
 
-    public Jeu(int nbEssai,int difficulte){
+    public Jeu(int nbEssai,int difficulte, String modeJeu){
         this.difficulte = difficulte;
         this.nbEssai = nbEssai;
+        this.modeJeu = modeJeu;
     }
 
     public abstract void defenseur();
@@ -37,7 +39,19 @@ public abstract class Jeu {
         return difficulte;
     }
 
+    public String getModeJeu() {
+        return modeJeu;
+    }
+
+    public void setModeJeu(String modeJeu) {
+        this.modeJeu = modeJeu;
+    }
+
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
     }
+
+    public abstract String genererCombinaisonOrdinateur (String reponse);
+
+    public abstract String nombreAleatoire(String plusMoins, int chiffre);
 }

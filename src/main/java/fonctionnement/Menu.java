@@ -40,11 +40,7 @@ public class Menu {
         System.out.println("1 : challengeur");
         System.out.println("2 : defenseur");
         System.out.println("3 : duel");
-        saisie = sc.nextInt();
-        while (saisie != 1 && saisie != 2 && saisie != 3){
-            System.out.println("Le choix ne correspond pas à ce qui est proposé");
-            saisie = sc.nextInt();
-        }
+        saisie = recupererSaisie();
         switch (saisie){
             case 1:
                 mode = "challenger";
@@ -59,12 +55,23 @@ public class Menu {
         return mode;
     }
 
-    public void finDePartie(){
+    public int finDePartie(){
         int choix;
         System.out.println("Que souhaitez-vous faire?");
         System.out.println("1 : Rejouer au même jeu");
         System.out.println("2 : Lancer un autre jeu");
         System.out.println("3 : Quitter l'application");
-        choix = sc.nextInt();
+        choix = recupererSaisie();
+        return choix;
+    }
+
+    private int recupererSaisie(){
+        int saisie;
+        saisie = sc.nextInt();
+        while (saisie != 1 && saisie != 2 && saisie != 3){
+            System.out.println("Le choix ne correspond pas à ce qui est proposé");
+            saisie = sc.nextInt();
+        }
+        return saisie;
     }
 }

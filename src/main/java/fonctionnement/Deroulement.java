@@ -8,10 +8,26 @@ public class Deroulement {
     private String modeJeu;
     private int nbEssai;
     private int difficulte;
+    private int rejeu;
     public void start() {
         lancerMenu();
-        creerJeu();
-
+        lancerJeu();
+        Menu rejouer = new Menu();
+        rejeu = rejouer.finDePartie();
+        while(rejeu == 1 || rejeu == 2){
+            switch (rejeu){
+                case 1:
+                    lancerJeu();
+                    rejeu = rejouer.finDePartie();
+                    break;
+                case 2:
+                    lancerMenu();
+                    lancerJeu();
+                    rejeu = rejouer.finDePartie();
+                    break;
+            }
+        }
+        System.out.println("A bientôt");
     }
 
     private void lancerMenu(){
@@ -20,9 +36,11 @@ public class Deroulement {
         modeJeu = nouveau.modeJeu();
     }
 
-    private void creerJeu(){
+    private void lancerJeu(){
         if (choixJeu.equals("Recherche")){
-            RecherchePlusMoins partie = new RecherchePlusMoins(10, 2);
+            RecupererProperties properties = new RecupererProperties();
+            properties.configurationRecherche();
+            RecherchePlusMoins partie = new RecherchePlusMoins(properties.getNbEssai(), properties.getNombreCases(),modeJeu);
             switch (modeJeu){
                 case "challenger":
                     partie.challengeur();
@@ -35,7 +53,7 @@ public class Deroulement {
                     break;
             }
         }else {
-            Mastermind partie = new Mastermind(nbEssai, difficulte);
+            Mastermind partie = new Mastermind(nbEssai, difficulte, modeJeu);
             switch (modeJeu){
                 case "challengeur":
                     partie.challengeur();

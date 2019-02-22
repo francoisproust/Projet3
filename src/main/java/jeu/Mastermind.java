@@ -1,8 +1,8 @@
 package jeu;
 
 public class Mastermind extends Jeu{
-    public Mastermind(int nbEssai, int difficulte) {
-        super(nbEssai, difficulte);
+    public Mastermind(int nbEssai, int difficulte, String modeJeu) {
+        super(nbEssai, difficulte, modeJeu);
     }
 
     @Override
@@ -43,6 +43,16 @@ public class Mastermind extends Jeu{
     @Override
     public boolean propositionEstNumerique(String proposition) {
         return false;
+    }
+
+    @Override
+    public String genererCombinaisonOrdinateur(String reponse) {
+        return null;
+    }
+
+    @Override
+    public String nombreAleatoire(String plusMoins, int chiffre) {
+        return null;
     }
 
 }
