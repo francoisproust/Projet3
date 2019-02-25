@@ -2,7 +2,7 @@ package fonctionnement;
 
 import java.util.Scanner;
 
-public class Menu {
+public class AffichageChoix {
 
     Scanner sc = new Scanner(System.in);
     private String jeu;

@@ -15,7 +15,7 @@ public class RecherchePlusMoins extends Jeu{
 
     @Override
     public void defenseur() {
-        combinaison = proposition();
+        combinaison = proposition("ordinateur");
         proposition = genererCombinaisonOrdinateur(this.getDifficulte());
         while(this.getNbEssai() >0 && egalite == false){
             if(egalite(combinaison,proposition) == true){
@@ -37,12 +37,13 @@ public class RecherchePlusMoins extends Jeu{
     public void challengeur() {
         combinaison = genererCombinaison(this.getDifficulte());
         while(this.getNbEssai() >0 && egalite == false){
-            proposition = proposition();
+            proposition = proposition("");
             if(egalite(combinaison,proposition) == true){
                 System.out.println("Bravo vous avez trouvé la solution");
                 break;
             }else{
                 reponse(combinaison,proposition);
+                System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
                 setNbEssai(getNbEssai() - 1);
             }
         }
@@ -53,7 +54,34 @@ public class RecherchePlusMoins extends Jeu{
 
     @Override
     public void duel() {
-
+        String combinaisonPourJoueur = genererCombinaison(this.getDifficulte());
+        String combinaisonPourOrdinateur = proposition("ordinateur");
+        String propositionOrdinateur = genererCombinaisonOrdinateur(this.getDifficulte());
+        while(this.getNbEssai() >0){
+            // partie ou le joueur cherche la combinaison
+            String propositionJoueur = proposition("");
+            if(egalite(combinaisonPourJoueur,propositionJoueur) == true){
+                System.out.println("Bravo vous avez trouvé la solution");
+                break;
+            }else{
+                String reponseJoueur = reponse(combinaisonPourJoueur,propositionJoueur);
+                System.out.println("Proposition : " + propositionJoueur + " -> Réponse : " + reponseJoueur);
+            }
+            // partie ou c est l'ordinateur qui cherche la combinaison
+            if(egalite(combinaisonPourOrdinateur,propositionOrdinateur) == true){
+                System.out.println("L'ordinateur a trouvé la solution");
+                break;
+            }else{
+                String reponseOrdinateur = reponse(combinaisonPourOrdinateur,propositionOrdinateur);
+                propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, proposition);
+                reponseOrdinateur = "";
+            }
+            setNbEssai(getNbEssai() - 1);
+        }
+        if(getNbEssai()== 0){
+            System.out.println("Vous avez perdu tous les deux");
+            System.out.println("La solution pour le joueur etait : " + combinaisonPourJoueur);
+        }
     }
 
     @Override
@@ -78,7 +106,7 @@ public class RecherchePlusMoins extends Jeu{
 
     @Override
     public String reponse(String combinaison, String proposition) {
-
+        reponse = "";
         for(int i = 0; i<combinaison.length();i++){
             if (combinaison.charAt(i) == proposition.charAt(i)){
                 reponse = reponse + "=";
@@ -88,14 +116,17 @@ public class RecherchePlusMoins extends Jeu{
                 reponse = reponse + "+";
             }
         }
-        System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
         return reponse;
     }
 
     @Override
-    public String proposition() {
+    public String proposition(String joueur) {
         String proposition;
-        System.out.print("Faites votre proposition : ");
+        if (joueur.equals("ordinateur")){
+            System.out.print("Faites votre proposition de combinaison à trouver par l'ordinateur : ");
+        }else if(joueur.equals("")){
+            System.out.println("Faites votre proposition de solution : ");
+        }
         proposition = sc.next();
         while(propositionEstNumerique(proposition) == false){
             System.out.println("Votre proposition n'est pas numérique!");

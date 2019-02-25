@@ -23,7 +23,7 @@ public abstract class Jeu {
 
     public abstract String reponse(String combinaison, String proposition);
 
-    public abstract String proposition();
+    public abstract String proposition(String joueur);
 
     public abstract boolean propositionEstNumerique(String proposition);
 

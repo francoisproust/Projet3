@@ -36,7 +36,7 @@ public class Mastermind extends Jeu{
     }
 
     @Override
-    public String proposition() {
+    public String proposition(String joueur) {
         return null;
     }
 

@@ -12,7 +12,7 @@ public class Deroulement {
     public void start() {
         lancerMenu();
         lancerJeu();
-        Menu rejouer = new Menu();
+        AffichageChoix rejouer = new AffichageChoix();
         rejeu = rejouer.finDePartie();
         while(rejeu == 1 || rejeu == 2){
             switch (rejeu){
@@ -31,9 +31,9 @@ public class Deroulement {
     }
 
     private void lancerMenu(){
-        Menu nouveau = new Menu();
-        choixJeu = nouveau.lancementJeu();
-        modeJeu = nouveau.modeJeu();
+        AffichageChoix lancementAffichage = new AffichageChoix();
+        choixJeu = lancementAffichage.lancementJeu();
+        modeJeu = lancementAffichage.modeJeu();
     }
 
     private void lancerJeu(){
