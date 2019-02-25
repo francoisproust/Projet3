@@ -45,9 +45,28 @@ public class RecherchePlusMoinsTest {
         assertEquals(true,jeu.propositionEstNumerique("9876543"));
     }
     @Test
+    public void genererPremierePropositionOrdinateur(){
+        RecherchePlusMoins jeu = new RecherchePlusMoins(1,3,"");
+        assertEquals("555",jeu.genererCombinaisonOrdinateur(3));
+    }
+    @Test
     public void nombreAleatoirePlus(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"");
-        assertEquals(9,jeu.nombreAleatoire("plus",'5'));
+        assertEquals("6",jeu.genererCombinaisonReponseOrdinateur("+","5"));
     }
-
+    @Test
+    public void nombreAleatoireMoins(){
+        RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"");
+        assertEquals("4",jeu.genererCombinaisonReponseOrdinateur("-","5"));
+    }
+    @Test
+    public void nombreAleatoireEgal(){
+        RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"");
+        assertEquals("6",jeu.genererCombinaisonReponseOrdinateur("=","6"));
+    }
+    @Test
+    public void reponseOrdinateur(){
+        RecherchePlusMoins jeu = new RecherchePlusMoins(1,3,"");
+        assertEquals("664",jeu.genererCombinaisonReponseOrdinateur("+=-","565"));
+    }
 }

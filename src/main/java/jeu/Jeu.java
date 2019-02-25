@@ -51,7 +51,9 @@ public abstract class Jeu {
         this.difficulte = difficulte;
     }
 
-    public abstract String genererCombinaisonOrdinateur (String reponse);
+    public abstract String genererCombinaisonReponseOrdinateur (String reponse, String proposition);
 
-    public abstract String nombreAleatoire(String plusMoins, int chiffre);
+    public abstract String nombreAleatoire(String plusMoins, char chiffre);
+
+    public abstract String genererCombinaisonOrdinateur(int difficulte);
 }

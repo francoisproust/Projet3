@@ -16,15 +16,16 @@ public class RecherchePlusMoins extends Jeu{
     @Override
     public void defenseur() {
         combinaison = proposition();
-        proposition = genererCombinaison(this.getDifficulte());
+        proposition = genererCombinaisonOrdinateur(this.getDifficulte());
         while(this.getNbEssai() >0 && egalite == false){
             if(egalite(combinaison,proposition) == true){
                 System.out.println("Bravo vous avez trouvé la solution");
                 break;
             }else{
                 reponse = reponse(combinaison,proposition);
-                proposition = genererCombinaisonOrdinateur(reponse);
+                proposition = genererCombinaisonReponseOrdinateur(reponse, proposition);
                 setNbEssai(getNbEssai() - 1);
+                reponse = "";
             }
         }
         if(getNbEssai()== 0){
@@ -114,27 +115,42 @@ public class RecherchePlusMoins extends Jeu{
     }
 
     @Override
-    public String genererCombinaisonOrdinateur(String reponse) {
+    public String genererCombinaisonReponseOrdinateur(String reponse, String proposition) {
+        String nouvelleReponse = "";
         for (int i=0; i < reponse.length(); i++){
             if (reponse.charAt(i) == '+'){
-                reponse = reponse + nombreAleatoire("Plus",(int) proposition.charAt(i));
+                nouvelleReponse = nouvelleReponse + nombreAleatoire("plus",proposition.charAt(i));
+            }else if (reponse.charAt(i) == '-'){
+                nouvelleReponse = nouvelleReponse + nombreAleatoire("moins",proposition.charAt(i));
+            }else{
+                nouvelleReponse = nouvelleReponse + proposition.charAt(i);
             }
         }
-        return null;
+        return nouvelleReponse;
     }
 
     @Override
-    public String nombreAleatoire(String plusMoins, int chiffre) {
-        String nombre = "";
-        Random r = new Random();
+    public String nombreAleatoire(String plusMoins, char chiffre) {
+        int nombre = 0;
+        String chiffreString;
+        chiffreString = Character.toString(chiffre);
         switch (plusMoins){
             case "plus":
-                nombre = String.valueOf(chiffre + 1) ;
+                nombre = Integer.parseInt(chiffreString )+ 1 ;
                 break;
             case "moins":
-                nombre = String.valueOf(chiffre - 1);
+                nombre = Integer.parseInt(chiffreString)- 1;
                 break;
         }
-        return nombre;
+        return String.valueOf(nombre);
+    }
+
+    @Override
+    public String genererCombinaisonOrdinateur(int difficulte) {
+        proposition = "";
+        for(int i = 0; i<difficulte; i++){
+            proposition = proposition + "5";
+        }
+        return proposition;
     }
 }

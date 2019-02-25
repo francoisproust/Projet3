@@ -46,12 +46,17 @@ public class Mastermind extends Jeu{
     }
 
     @Override
-    public String genererCombinaisonOrdinateur(String reponse) {
+    public String genererCombinaisonReponseOrdinateur(String reponse, String proposition) {
         return null;
     }
 
     @Override
-    public String nombreAleatoire(String plusMoins, int chiffre) {
+    public String nombreAleatoire(String plusMoins, char chiffre) {
+        return null;
+    }
+
+    @Override
+    public String genererCombinaisonOrdinateur(int difficulte) {
         return null;
     }
 
