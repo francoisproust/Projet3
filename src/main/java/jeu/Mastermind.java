@@ -1,8 +1,16 @@
 package jeu;
 
+import java.util.Scanner;
+
 public class Mastermind extends Jeu{
-    public Mastermind(int nbEssai, int difficulte, String modeJeu) {
-        super(nbEssai, difficulte, modeJeu);
+    Scanner sc = new Scanner(System.in);
+    String combinaison;
+    String proposition;
+    boolean egalite;
+    String reponse = "";
+
+    public Mastermind(int nbEssai, int difficulte, String modeJeu, String debug) {
+        super(nbEssai, difficulte, modeJeu, debug);
     }
 
     @Override
@@ -12,7 +20,7 @@ public class Mastermind extends Jeu{
 
     @Override
     public void challengeur() {
-
+        combinaison = genererCombinaison(this.getDifficulte());
     }
 
     @Override

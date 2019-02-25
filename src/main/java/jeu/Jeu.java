@@ -4,11 +4,13 @@ public abstract class Jeu {
     private int nbEssai;
     private int difficulte;
     private String modeJeu;
+    private String debug;
 
-    public Jeu(int nbEssai,int difficulte, String modeJeu){
+    public Jeu(int nbEssai,int difficulte, String modeJeu, String debug){
         this.difficulte = difficulte;
         this.nbEssai = nbEssai;
         this.modeJeu = modeJeu;
+        this.debug = debug;
     }
 
     public abstract void defenseur();
@@ -27,18 +29,6 @@ public abstract class Jeu {
 
     public abstract boolean propositionEstNumerique(String proposition);
 
-    public int getNbEssai() {
-        return nbEssai;
-    }
-
-    public void setNbEssai(int nbEssai) {
-        this.nbEssai = nbEssai;
-    }
-
-    public int getDifficulte() {
-        return difficulte;
-    }
-
     public String getModeJeu() {
         return modeJeu;
     }
@@ -56,4 +46,24 @@ public abstract class Jeu {
     public abstract String nombreAleatoire(String plusMoins, char chiffre);
 
     public abstract String genererCombinaisonOrdinateur(int difficulte);
+
+    public int getNbEssai() {
+        return nbEssai;
+    }
+
+    public void setNbEssai(int nbEssai) {
+        this.nbEssai = nbEssai;
+    }
+
+    public int getDifficulte() {
+        return difficulte;
+    }
+
+    public String getDebug() {
+        return debug;
+    }
+
+    public void setDebug(String debug) {
+        this.debug = debug;
+    }
 }

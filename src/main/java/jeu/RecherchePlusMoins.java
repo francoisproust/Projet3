@@ -9,8 +9,8 @@ public class RecherchePlusMoins extends Jeu{
     String proposition;
     boolean egalite;
     String reponse = "";
-    public RecherchePlusMoins(int nbEssai, int difficulte, String modeJeu) {
-        super(nbEssai, difficulte,modeJeu);
+    public RecherchePlusMoins(int nbEssai, int difficulte, String modeJeu,String debug) {
+        super(nbEssai, difficulte,modeJeu, debug);
     }
 
     @Override
@@ -36,6 +36,9 @@ public class RecherchePlusMoins extends Jeu{
     @Override
     public void challengeur() {
         combinaison = genererCombinaison(this.getDifficulte());
+        if (this.getDebug().equals("true")){
+            System.out.println("La solution est : " + combinaison);
+        }
         while(this.getNbEssai() >0 && egalite == false){
             proposition = proposition("");
             if(egalite(combinaison,proposition) == true){
