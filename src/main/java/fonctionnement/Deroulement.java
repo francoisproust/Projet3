@@ -57,7 +57,7 @@ public class Deroulement {
             properties.configurationRecherche();
             Mastermind partie = new Mastermind(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
             switch (modeJeu){
-                case "challengeur":
+                case "challenger":
                     partie.challengeur();
                     break;
                 case "defenseur":

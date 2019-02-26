@@ -16,75 +16,18 @@ public class RecherchePlusMoins extends Jeu{
     @Override
     public void defenseur() {
         combinaison = proposition("ordinateur");
-        proposition = genererCombinaisonOrdinateur(this.getDifficulte());
-        while(this.getNbEssai() >0 && egalite == false){
-            if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
-                break;
-            }else{
-                reponse = reponse(combinaison,proposition);
-                proposition = genererCombinaisonReponseOrdinateur(reponse, proposition);
-                setNbEssai(getNbEssai() - 1);
-                reponse = "";
-            }
-        }
-        if(getNbEssai()== 0){
-            System.out.println("L'ordinateur n'as pas trouvé la bonne combinaison");
-        }
+       // proposition = genererCombinaisonOrdinateur(this.getDifficulte());
+        deroulementJeuModeDefenseur(combinaison);
     }
 
     @Override
     public void challengeur() {
-        combinaison = genererCombinaison(this.getDifficulte());
-        if (this.getDebug().equals("true")){
-            System.out.println("La solution est : " + combinaison);
-        }
-        while(this.getNbEssai() >0 && egalite == false){
-            proposition = proposition("");
-            if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
-                break;
-            }else{
-                reponse(combinaison,proposition);
-                System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
-                setNbEssai(getNbEssai() - 1);
-            }
-        }
-        if(getNbEssai()== 0){
-            System.out.println("Vous avez perdu, la solution était : " + combinaison);
-        }
+        deroulementJeuModeChallengeur(combinaison);
     }
 
     @Override
     public void duel() {
-        String combinaisonPourJoueur = genererCombinaison(this.getDifficulte());
-        String combinaisonPourOrdinateur = proposition("ordinateur");
-        String propositionOrdinateur = genererCombinaisonOrdinateur(this.getDifficulte());
-        while(this.getNbEssai() >0){
-            // partie ou le joueur cherche la combinaison
-            String propositionJoueur = proposition("");
-            if(egalite(combinaisonPourJoueur,propositionJoueur) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
-                break;
-            }else{
-                String reponseJoueur = reponse(combinaisonPourJoueur,propositionJoueur);
-                System.out.println("Proposition : " + propositionJoueur + " -> Réponse : " + reponseJoueur);
-            }
-            // partie ou c est l'ordinateur qui cherche la combinaison
-            if(egalite(combinaisonPourOrdinateur,propositionOrdinateur) == true){
-                System.out.println("L'ordinateur a trouvé la solution");
-                break;
-            }else{
-                String reponseOrdinateur = reponse(combinaisonPourOrdinateur,propositionOrdinateur);
-                propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, proposition);
-                reponseOrdinateur = "";
-            }
-            setNbEssai(getNbEssai() - 1);
-        }
-        if(getNbEssai()== 0){
-            System.out.println("Vous avez perdu tous les deux");
-            System.out.println("La solution pour le joueur etait : " + combinaisonPourJoueur);
-        }
+        deroulementJeuModeDuel();
     }
 
     @Override

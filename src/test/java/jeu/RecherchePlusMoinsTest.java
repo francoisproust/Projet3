@@ -30,7 +30,7 @@ public class RecherchePlusMoinsTest {
         assertEquals(true,jeu.egalite("123","123"));
     }
     @Test
-    public void combinaisonDiffente(){
+    public void combinaisonDifferente(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
         assertEquals(false,jeu.egalite("255","123"));
     }

@@ -10,6 +10,10 @@ public class RecupererProperties {
     private int nombreCases;
     private int nbEssai;
     private String debug;
+    private int nombreUtilisable;
+    private String numerique;
+    private String alphabetique;
+    private String choixNumAlpha;
 
 
     public void configurationRecherche(){
@@ -58,6 +62,29 @@ public class RecupererProperties {
         }
     }
 
+    public void configurationSpecifiqueMastermind(){
+        Properties prop = new Properties();
+        InputStream input = null;
+        try{
+            input = new FileInputStream("src/main/java/ressources/config.properties");
+            prop.load(input);
+            this.nombreUtilisable = Integer.parseInt(prop.getProperty("mastermind.nombreUtilisable"));
+            this.numerique = prop.getProperty("mastermind.numerique");
+            this.alphabetique = prop.getProperty("mastermind.alphabetique");
+            this.choixNumAlpha = prop.getProperty("mastermind.choixNumAlpha");
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 
 
     public int getNombreCases() {
@@ -82,5 +109,37 @@ public class RecupererProperties {
 
     public void setDebug(String debug) {
         this.debug = debug;
+    }
+
+    public String getNumerique() {
+        return numerique;
+    }
+
+    public void setNumerique(String numerique) {
+        this.numerique = numerique;
+    }
+
+    public String getAlphabetique() {
+        return alphabetique;
+    }
+
+    public void setAlphabetique(String alphabetique) {
+        this.alphabetique = alphabetique;
+    }
+
+    public String getChoixNumAlpha() {
+        return choixNumAlpha;
+    }
+
+    public void setChoixNumAlpha(String choixNumAlpha) {
+        this.choixNumAlpha = choixNumAlpha;
+    }
+
+    public int getNombreUtilisable() {
+        return nombreUtilisable;
+    }
+
+    public void setNombreUtilisable(int nombreUtilisable) {
+        this.nombreUtilisable = nombreUtilisable;
     }
 }
