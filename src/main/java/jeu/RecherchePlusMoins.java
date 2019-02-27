@@ -27,6 +27,7 @@ public class RecherchePlusMoins extends Jeu{
 
     @Override
     public void duel() {
+
         deroulementJeuModeDuel();
     }
 

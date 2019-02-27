@@ -37,8 +37,8 @@ public class Deroulement {
     }
 
     private void lancerJeu(){
+        RecupererProperties properties = new RecupererProperties();
         if (choixJeu.equals("Recherche")){
-            RecupererProperties properties = new RecupererProperties();
             properties.configurationRecherche();
             RecherchePlusMoins partie = new RecherchePlusMoins(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
             switch (modeJeu){
@@ -53,8 +53,7 @@ public class Deroulement {
                     break;
             }
         }else {
-            RecupererProperties properties = new RecupererProperties();
-            properties.configurationRecherche();
+            properties.configurationMastermind();
             Mastermind partie = new Mastermind(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
             switch (modeJeu){
                 case "challenger":

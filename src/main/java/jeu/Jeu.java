@@ -51,11 +51,11 @@ public abstract class Jeu {
         boolean egalite = false;
         String proposition;
         String reponse ="";
-        combinaison = genererCombinaison(this.getDifficulte());
-        if (this.getDebug().equals("true")){
+        combinaison = genererCombinaison(difficulte);
+        if (debug.equals("true")){
             System.out.println("La solution est : " + combinaison);
         }
-        while(this.getNbEssai() >0 && egalite == false){
+        while(nbEssai >0 && egalite == false){
             proposition = proposition("");
             if(egalite(combinaison,proposition) == true){
                 System.out.println("Bravo vous avez trouvé la solution");
@@ -63,9 +63,9 @@ public abstract class Jeu {
             }else{
                 reponse = reponse(combinaison,proposition);
                 System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
-                setNbEssai(getNbEssai() - 1);
+                nbEssai = nbEssai - 1;
             }
-            if(getNbEssai()== 0){
+            if(nbEssai== 0){
                 System.out.println("Vous avez perdu, la solution était : " + combinaison);
             }
         }
@@ -74,28 +74,28 @@ public abstract class Jeu {
     protected void deroulementJeuModeDefenseur(String combinaison){
         boolean egalite = false;
         String reponse ="";
-        String proposition = genererCombinaisonOrdinateur(this.getDifficulte());
-        while(this.getNbEssai() >0 && egalite == false){
+        String proposition = genererCombinaisonOrdinateur(difficulte);
+        while(nbEssai >0 && egalite == false){
             if(egalite(combinaison,proposition) == true){
                 System.out.println("Bravo vous avez trouvé la solution");
                 break;
             }else{
                 reponse = reponse(combinaison,proposition);
                 proposition = genererCombinaisonReponseOrdinateur(reponse, proposition);
-                setNbEssai(getNbEssai() - 1);
+                nbEssai = nbEssai - 1;
                 reponse = "";
             }
         }
-        if(getNbEssai()== 0){
+        if(nbEssai== 0){
             System.out.println("L'ordinateur n'as pas trouvé la bonne combinaison");
         }
     }
 
     protected void deroulementJeuModeDuel(){
-        String combinaisonPourJoueur = genererCombinaison(this.getDifficulte());
+        String combinaisonPourJoueur = genererCombinaison(difficulte);
         String combinaisonPourOrdinateur = proposition("ordinateur");
-        String propositionOrdinateur = genererCombinaisonOrdinateur(this.getDifficulte());
-        while(this.getNbEssai() >0){
+        String propositionOrdinateur = genererCombinaisonOrdinateur(difficulte);
+        while(nbEssai >0){
             // partie ou le joueur cherche la combinaison
             String propositionJoueur = proposition("");
             if(egalite(combinaisonPourJoueur,propositionJoueur) == true){
@@ -114,9 +114,9 @@ public abstract class Jeu {
                 propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, combinaisonPourOrdinateur);
                 reponseOrdinateur = "";
             }
-            setNbEssai(getNbEssai() - 1);
+            nbEssai = nbEssai - 1;
         }
-        if(getNbEssai()== 0){
+        if(nbEssai== 0){
             System.out.println("Vous avez perdu tous les deux");
             System.out.println("La solution pour le joueur etait : " + combinaisonPourJoueur);
         }

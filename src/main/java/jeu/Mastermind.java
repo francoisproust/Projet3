@@ -14,6 +14,8 @@ public class Mastermind extends Jeu{
     private String numerique;
     private String alphabetique;
     private String choixNumAlpha;
+    private int bienPlace = 0;
+    private int present = 0;
 
     public Mastermind(int nbEssai, int difficulte, String modeJeu, String debug) {
         super(nbEssai, difficulte, modeJeu, debug);
@@ -66,8 +68,8 @@ public class Mastermind extends Jeu{
 
     @Override
     public String reponse(String combinaison, String proposition) {
-        int bienPlace = 0;
-        int present = 0;
+        bienPlace = 0;
+        present = 0;
         for(int i = 0; i<combinaison.length();i++){
             if(combinaison.charAt(i) == proposition.charAt(i)){
                 bienPlace = bienPlace + 1;
@@ -123,7 +125,20 @@ public class Mastermind extends Jeu{
 
     @Override
     public String genererCombinaisonOrdinateur(int difficulte) {
-        return null;
+        proposition = "";
+        switch(choixNumAlpha){
+            case "numerique":
+                for (int i=0; i<difficulte;i++){
+                    proposition = proposition + numerique.charAt(i);
+                }
+                break;
+            case "alphabetique":
+                for (int i=0; i<difficulte;i++){
+                    proposition = proposition + alphabetique.charAt(i);
+                }
+                break;
+        }
+        return proposition;
     }
 
     private void recupererPropertiesSpecifique(){
