@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class RecherchePlusMoinsTest {
     @Test
-   public void propositionSuperieurCombinaison(){
+    public void propositionSuperieurCombinaison(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
         assertEquals("-",jeu.reponse("1","3"));
     }

@@ -16,7 +16,7 @@ public class RecherchePlusMoins extends Jeu{
     @Override
     public void defenseur() {
         combinaison = proposition("ordinateur");
-       // proposition = genererCombinaisonOrdinateur(this.getDifficulte());
+        // proposition = genererCombinaisonOrdinateur(this.getDifficulte());
         deroulementJeuModeDefenseur(combinaison);
     }
 
