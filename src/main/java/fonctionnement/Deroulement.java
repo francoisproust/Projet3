@@ -48,11 +48,11 @@ public class Deroulement {
      */
     private void lancerJeu(){
         RecupererProperties properties = new RecupererProperties();
-        if (choixJeu.equals("Recherche")){
+        if (choixJeu.equals(Outils.RECHERCHE)) {
             properties.configurationRecherche();
-            RecherchePlusMoins partie = new RecherchePlusMoins(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
+            RecherchePlusMoins partie = new RecherchePlusMoins(properties.getNbEssai(), properties.getNombreCases(), modeJeu, properties.getDebug());
             switch (modeJeu){
-                case "challenger":
+                case "challengeur":
                     partie.challengeur();
                     break;
                 case "defenseur":
@@ -62,11 +62,11 @@ public class Deroulement {
                     partie.duel();
                     break;
             }
-        }else {
+        }else if(choixJeu.equals(Outils.MASTERMIND)) {
             properties.configurationMastermind();
             Mastermind partie = new Mastermind(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
             switch (modeJeu){
-                case "challenger":
+                case "challengeur":
                     partie.challengeur();
                     break;
                 case "defenseur":

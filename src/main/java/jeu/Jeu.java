@@ -61,12 +61,6 @@ public abstract class Jeu {
     public abstract String reponse(String combinaison, String proposition,String joueur);
 
     /**
-     * Methode permettant au joueur de proposer une combinaison à trouver par l ordinateur ou une proposition de solution
-     * @param joueur ordinateur / ""
-     * @return proposition de combinaison
-     */
-
-    /**
      * génère une première combinaison de solution pour l'ordinateur
      * @param difficulte nombre de caractères de la combinaison à trouver
      * @return proposition de combinaison initiale (au milieu des possibilités)

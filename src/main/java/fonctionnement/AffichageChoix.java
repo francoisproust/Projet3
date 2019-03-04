@@ -23,9 +23,9 @@ public class AffichageChoix {
             saisie = sc.nextInt();
         }
         if (saisie == 1){
-            jeu = "Recherche";
+            jeu = Outils.RECHERCHE;
         }else{
-            jeu = "Mastermind";
+            jeu = Outils.MASTERMIND;
         }
         return jeu;
     }
@@ -43,13 +43,13 @@ public class AffichageChoix {
         saisie = recupererSaisie();
         switch (saisie){
             case 1:
-                mode = "challenger";
+                mode = Outils.CHALLENGEUR;
                 break;
             case 2:
-                mode = "defenseur";
+                mode = Outils.DEFENSEUR;
                 break;
             case 3:
-                mode = "duel";
+                mode = Outils.DUEL;
                 break;
         }
         return mode;

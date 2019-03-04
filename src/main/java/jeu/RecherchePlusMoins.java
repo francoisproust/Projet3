@@ -83,6 +83,12 @@ public class RecherchePlusMoins extends Jeu{
         return proposition;
     }
 
+    /**
+     *  Methode permettant d'ajouter ou soustraire 1 pour générer une nouvelle combinaison
+     * @param plusMoins plus ou moins
+     * @param chiffre valeur d'un caractère de la combinaison
+     * @return caractère valorisé à +1 ou -1
+     */
     private String nombreAleatoire(String plusMoins, char chiffre) {
         int nombre = 0;
         String chiffreString;
