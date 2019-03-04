@@ -33,6 +33,7 @@ public class Mastermind extends Jeu{
     @Override
     public void challengeur() {
         recupererPropertiesSpecifique();
+        combinaison = genererCombinaison(this.getDifficulte());
         deroulementJeuModeChallengeur(combinaison);
     }
 
@@ -110,6 +111,11 @@ public class Mastermind extends Jeu{
         return reponse;
     }
 
+    /**
+     * Methode permettant de connaitre en fonction d'un caractère de la combinaison sa position de la plage d'utilisation
+     * @param caractere valeur du caractère
+     * @return sa position dans la plage d'utilisation
+     */
     private int positionCaractere(char caractere){
         int position;
         int i=0;
@@ -161,10 +167,6 @@ public class Mastermind extends Jeu{
         return propositionReponse;
     }
 
-    public String nombreAleatoire(String plusMoins, char chiffre) {
-        return null;
-    }
-
     @Override
     public String genererCombinaisonOrdinateur(int difficulte) {
         proposition = "";
@@ -183,6 +185,9 @@ public class Mastermind extends Jeu{
         return proposition;
     }
 
+    /**
+     * Metode récupérant les propriétés spécifiques du Mastermind
+     */
     private void recupererPropertiesSpecifique(){
         RecupererProperties properties = new RecupererProperties();
         properties.configurationSpecifiqueMastermind();

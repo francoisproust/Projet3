@@ -22,6 +22,7 @@ public class RecherchePlusMoins extends Jeu{
 
     @Override
     public void challengeur() {
+        combinaison = genererCombinaison(this.getDifficulte());
         deroulementJeuModeChallengeur(combinaison);
     }
 

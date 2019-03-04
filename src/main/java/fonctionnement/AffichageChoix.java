@@ -55,6 +55,10 @@ public class AffichageChoix {
         return mode;
     }
 
+    /**
+     * Merthode permettant à la fin de la partie de savoir ce que nous faisons
+     * @return le choix de l'utilisateur
+     */
     public int finDePartie(){
         int choix;
         System.out.println("Que souhaitez-vous faire?");
@@ -65,6 +69,10 @@ public class AffichageChoix {
         return choix;
     }
 
+    /**
+     * récupère la saisie au clavier de l'utilisateur
+     * @return le choix de saisie
+     */
     private int recupererSaisie(){
         int saisie;
         saisie = sc.nextInt();

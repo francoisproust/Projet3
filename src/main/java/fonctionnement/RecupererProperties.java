@@ -16,6 +16,9 @@ public class RecupererProperties {
     private String choixNumAlpha;
 
 
+    /**
+     * Récupération des properties pour le jeu recherche +/-
+     */
     public void configurationRecherche(){
         Properties prop = new Properties();
         InputStream input = null;
@@ -39,6 +42,9 @@ public class RecupererProperties {
         }
     }
 
+    /**
+     * Récupération des properties pour le jeu Mastermind
+     */
     public void configurationMastermind(){
         Properties prop = new Properties();
         InputStream input = null;
@@ -62,6 +68,12 @@ public class RecupererProperties {
         }
     }
 
+    /**
+     *  Récupération des propeties spécifiques au jeu mastermind tel que:
+     *  le nombre de valeur utilisable
+     *  les différentes plages d'utilisation numériques et alphabétiques
+     *  si l'on prend des valeurs numériques ou alphabétiques
+     */
     public void configurationSpecifiqueMastermind(){
         Properties prop = new Properties();
         InputStream input = null;
