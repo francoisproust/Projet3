@@ -10,7 +10,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("numerique");
         jeu.setNombreUtilisable(4);
         jeu.setNumerique("0123456789");
-        assertEquals("1 présent, 1 bien placé",jeu.reponse("563","538"));
+        assertEquals("1 présent, 1 bien placé",jeu.reponse("563","538","humain"));
     }
     @Test
     public void CombinaisonUnBienPlaceUnPresentAlphabetique(){
@@ -18,7 +18,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("alphabetique");
         jeu.setNombreUtilisable(4);
         jeu.setAlphabetique("ABCDEFGHIJ");
-        assertEquals("1 présent, 1 bien placé",jeu.reponse("ABC","ACD"));
+        assertEquals("1 présent, 1 bien placé",jeu.reponse("ABC","ACD","humain"));
     }
     @Test
     public void combinaisonIdentiqueAlphabetique(){
@@ -58,7 +58,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("numerique");
         jeu.setNombreUtilisable(4);
         jeu.setNumerique("0123456789");
-        assertEquals("012",jeu.genererCombinaisonOrdinateur(3));
+        assertEquals("222",jeu.genererCombinaisonOrdinateur(3));
     }
     @Test
     public void genererCombinaisonAlphabetique(){
@@ -66,6 +66,6 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("alphabetique");
         jeu.setNombreUtilisable(4);
         jeu.setAlphabetique("ABCDEFGHIJ");
-        assertEquals("ABC",jeu.genererCombinaisonOrdinateur(3));
+        assertEquals("CCC",jeu.genererCombinaisonOrdinateur(3));
     }
 }

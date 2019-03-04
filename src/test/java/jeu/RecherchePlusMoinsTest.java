@@ -7,22 +7,22 @@ public class RecherchePlusMoinsTest {
     @Test
     public void propositionSuperieurCombinaison(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals("-",jeu.reponse("1","3"));
+        assertEquals("-",jeu.reponse("1","3",""));
     }
     @Test
     public void propositionInferieurCombinaison(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals("+",jeu.reponse("7","3"));
+        assertEquals("+",jeu.reponse("7","3",""));
     }
     @Test
     public void propositionEgalCombinaison(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals("=",jeu.reponse("7","7"));
+        assertEquals("=",jeu.reponse("7","7",""));
     }
     @Test
     public void propositionPlusieursValeursSupEgalMoins(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals("-=+",jeu.reponse("258","651"));
+        assertEquals("-=+",jeu.reponse("258","651",""));
     }
     @Test
     public void combinaisonIdentique(){
@@ -33,16 +33,6 @@ public class RecherchePlusMoinsTest {
     public void combinaisonDifferente(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
         assertEquals(false,jeu.egalite("255","123"));
-    }
-    @Test
-    public void propositionNonNumerique(){
-        RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals(false,jeu.propositionEstNumerique("TOTO123"));
-    }
-    @Test
-    public void propositionNumerique(){
-        RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals(true,jeu.propositionEstNumerique("9876543"));
     }
     @Test
     public void genererPremierePropositionOrdinateur(){

@@ -23,11 +23,9 @@ public abstract class Jeu {
 
     public abstract boolean egalite(String combinaison, String proposition);
 
-    public abstract String reponse(String combinaison, String proposition);
+    public abstract String reponse(String combinaison, String proposition,String joueur);
 
     public abstract String proposition(String joueur);
-
-    public abstract boolean propositionEstNumerique(String proposition);
 
     public String getModeJeu() {
         return modeJeu;
@@ -40,10 +38,6 @@ public abstract class Jeu {
     public void setDifficulte(int difficulte) {
         this.difficulte = difficulte;
     }
-
-    public abstract String genererCombinaisonReponseOrdinateur (String reponse, String proposition);
-
-    public abstract String nombreAleatoire(String plusMoins, char chiffre);
 
     public abstract String genererCombinaisonOrdinateur(int difficulte);
 
@@ -58,10 +52,10 @@ public abstract class Jeu {
         while(nbEssai >0 && egalite == false){
             proposition = proposition("");
             if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
+                System.out.println("Bravo, la solution a été trouvé en " + nbEssai + " coups");
                 break;
             }else{
-                reponse = reponse(combinaison,proposition);
+                reponse = reponse(combinaison,proposition,"humain");
                 System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
                 nbEssai = nbEssai - 1;
             }
@@ -77,10 +71,10 @@ public abstract class Jeu {
         String proposition = genererCombinaisonOrdinateur(difficulte);
         while(nbEssai >0 && egalite == false){
             if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
+                System.out.println("Bravo, la solution a été trouvé en " + nbEssai + " coups");
                 break;
             }else{
-                reponse = reponse(combinaison,proposition);
+                reponse = reponse(combinaison,proposition,"ordinateur");
                 proposition = genererCombinaisonReponseOrdinateur(reponse, proposition);
                 nbEssai = nbEssai - 1;
                 reponse = "";
@@ -102,7 +96,7 @@ public abstract class Jeu {
                 System.out.println("Bravo vous avez trouvé la solution");
                 break;
             }else{
-                String reponseJoueur = reponse(combinaisonPourJoueur,propositionJoueur);
+                String reponseJoueur = reponse(combinaisonPourJoueur,propositionJoueur,"humain");
                 System.out.println("Proposition : " + propositionJoueur + " -> Réponse : " + reponseJoueur);
             }
             // partie ou c est l'ordinateur qui cherche la combinaison
@@ -110,8 +104,8 @@ public abstract class Jeu {
                 System.out.println("L'ordinateur a trouvé la solution");
                 break;
             }else{
-                String reponseOrdinateur = reponse(combinaisonPourOrdinateur,propositionOrdinateur);
-                propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, combinaisonPourOrdinateur);
+                String reponseOrdinateur = reponse(combinaisonPourOrdinateur,propositionOrdinateur,"ordinateur");
+                propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, propositionOrdinateur);
                 reponseOrdinateur = "";
             }
             nbEssai = nbEssai - 1;
@@ -121,6 +115,8 @@ public abstract class Jeu {
             System.out.println("La solution pour le joueur etait : " + combinaisonPourJoueur);
         }
     }
+
+    protected abstract String genererCombinaisonReponseOrdinateur(String reponseOrdinateur, String combinaisonPourOrdinateur);
 
     public int getNbEssai() {
         return nbEssai;

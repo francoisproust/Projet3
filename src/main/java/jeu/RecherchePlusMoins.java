@@ -52,7 +52,7 @@ public class RecherchePlusMoins extends Jeu{
     }
 
     @Override
-    public String reponse(String combinaison, String proposition) {
+    public String reponse(String combinaison, String proposition,String joueur) {
         reponse = "";
         for(int i = 0; i<combinaison.length();i++){
             if (combinaison.charAt(i) == proposition.charAt(i)){
@@ -75,40 +75,14 @@ public class RecherchePlusMoins extends Jeu{
             System.out.println("Faites votre proposition de solution : ");
         }
         proposition = sc.next();
-        while(propositionEstNumerique(proposition) == false){
+        while(proposition.matches("-?[0-9]+") == false){
             System.out.println("Votre proposition n'est pas numérique!");
             proposition = sc.next();
         }
         return proposition;
     }
 
-    @Override
-    public boolean propositionEstNumerique(String proposition) {
-        try {
-            Integer.parseInt(proposition);
-        } catch (NumberFormatException e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String genererCombinaisonReponseOrdinateur(String reponse, String proposition) {
-        String nouvelleReponse = "";
-        for (int i=0; i < reponse.length(); i++){
-            if (reponse.charAt(i) == '+'){
-                nouvelleReponse = nouvelleReponse + nombreAleatoire("plus",proposition.charAt(i));
-            }else if (reponse.charAt(i) == '-'){
-                nouvelleReponse = nouvelleReponse + nombreAleatoire("moins",proposition.charAt(i));
-            }else{
-                nouvelleReponse = nouvelleReponse + proposition.charAt(i);
-            }
-        }
-        return nouvelleReponse;
-    }
-
-    @Override
-    public String nombreAleatoire(String plusMoins, char chiffre) {
+    private String nombreAleatoire(String plusMoins, char chiffre) {
         int nombre = 0;
         String chiffreString;
         chiffreString = Character.toString(chiffre);
@@ -131,4 +105,19 @@ public class RecherchePlusMoins extends Jeu{
         }
         return proposition;
     }
+
+    @Override
+    public String genererCombinaisonReponseOrdinateur (String reponse, String proposition){
+        String nouvelleReponse = "";
+        for (int i=0; i < reponse.length(); i++){
+            if (reponse.charAt(i) == '+'){
+                nouvelleReponse = nouvelleReponse + nombreAleatoire("plus",proposition.charAt(i));
+            }else if (reponse.charAt(i) == '-'){
+                nouvelleReponse = nouvelleReponse + nombreAleatoire("moins",proposition.charAt(i));
+            }else{
+                nouvelleReponse = nouvelleReponse + proposition.charAt(i);
+            }
+        }
+        return nouvelleReponse;
+    };
 }
