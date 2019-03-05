@@ -1,8 +1,8 @@
 package jeu;
 
-import com.sun.deploy.util.StringUtils;
 import fonctionnement.RecupererProperties;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
 
 public class Mastermind extends Jeu{
@@ -18,6 +18,7 @@ public class Mastermind extends Jeu{
     private int bienPlace = 0;
     private int present = 0;
     String plageUtilisation;
+    private static Logger logger = LogManager.getLogger(Mastermind.class);
 
     public Mastermind(int nbEssai, int difficulte, String modeJeu, String debug) {
         super(nbEssai, difficulte, modeJeu, debug);
@@ -25,6 +26,7 @@ public class Mastermind extends Jeu{
 
     @Override
     public void defenseur() {
+        logger.debug("Lancement methode defenseur() du mode Mastermind");
         recupererPropertiesSpecifique();
         combinaison = proposition("");
         deroulementJeuModeDefenseur(combinaison);
@@ -32,6 +34,7 @@ public class Mastermind extends Jeu{
 
     @Override
     public void challengeur() {
+        logger.debug("Lancement methode challengeur() du mode Mastermind");
         recupererPropertiesSpecifique();
         combinaison = genererCombinaison(this.getDifficulte());
         deroulementJeuModeChallengeur(combinaison);
@@ -39,12 +42,15 @@ public class Mastermind extends Jeu{
 
     @Override
     public void duel() {
+        logger.debug("Lancement methode duel() du mode Mastermind");
         recupererPropertiesSpecifique();
         deroulementJeuModeDuel();
     }
 
     @Override
     public String genererCombinaison(int difficulte) {
+        logger.debug("Lancement de la methode genererCombinaison()");
+        logger.info("Générer combinaison en fonction d'un certain nombre de caractère");
         String combinaison = "";
         if (this.getChoixNumAlpha().equals("numerique")) {
             int nombreUtilisable = this.nombreUtilisable;
@@ -52,26 +58,33 @@ public class Mastermind extends Jeu{
                 int nombre = (int) (Math.random() * (nombreUtilisable - 0));
                 combinaison = combinaison + nombre;
             }
+            logger.info("La combinaison obtenue est numerique et est égale à : " + combinaison);
         }else if(this.getChoixNumAlpha().equals("alphabetique")) {
             int nombreUtilisable = this.nombreUtilisable;
             for (int i = 0; i < difficulte; i++) {
                 int nombre = (int) (Math.random() * (nombreUtilisable - 0));
                 combinaison = combinaison + this.alphabetique.charAt(nombre);
             }
+            logger.info("La combinaison obtenue est alphabétique et est égale à : " + combinaison);
         }
         return combinaison;
     }
 
     @Override
     public boolean egalite(String combinaison, String proposition) {
+        logger.debug("Lancement de la methode egalite()");
         if(combinaison.equals(proposition)){
+            logger.info("La combinaison et la proposition sont identiques");
             return true;
         }
+        logger.info("La combinaison et la proposition sont différentes");
         return false;
     }
 
     @Override
     public String reponse(String combinaison, String proposition,String joueur) {
+        logger.debug("Lancement de la methode reponse()");
+        logger.info("Générer une réponse en fonction de la proposition faite et de la combinaison à trouver");
         bienPlace = 0;
         present = 0;
         int caractereCombinaison;
@@ -94,6 +107,7 @@ public class Mastermind extends Jeu{
                 }
             }
             reponse = present + " présent, " + bienPlace + " bien placé";
+            logger.info("la réponse généré est : " + reponse);
         } else if (joueur.equals("ordinateur")) {
             reponse = "";
             for (int i = 0; i < combinaison.length(); i++) {
@@ -107,6 +121,7 @@ public class Mastermind extends Jeu{
                     reponse = reponse + "=";
                 }
             }
+            logger.info("la réponse généré est : " + reponse);
         }
         return reponse;
     }
@@ -117,6 +132,8 @@ public class Mastermind extends Jeu{
      * @return sa position dans la plage d'utilisation
      */
     private int positionCaractere(char caractere){
+        logger.debug("Lancement de la methode positionCaractere()");
+        logger.info("a partir d'un caractère, on détermine sa position dans la liste de la plage d'utilisation");
         int position;
         int i=0;
         while(caractere != plageUtilisation.charAt(i)){
@@ -129,6 +146,7 @@ public class Mastermind extends Jeu{
 
     @Override
     public String proposition(String joueur) {
+        logger.debug("Lancement de la methode proposition()");
         String proposition;
         if (joueur.equals("ordinateur")){
             System.out.print("Faites votre proposition de combinaison à trouver par l'ordinateur sur " + this.getDifficulte() + ": ");
@@ -138,20 +156,24 @@ public class Mastermind extends Jeu{
         proposition = sc.next();
         while(proposition.length() != this.getDifficulte()){
             System.out.println("Votre proposition est trop courte ou trop longue, elle doit être sur : " + this.getDifficulte()  + " caractères");
+            logger.debug("La proposition faite n'est pas au bon format");
             proposition = sc.next();
         }
         if(this.getChoixNumAlpha().equals("numerique")){
             //boolean estNumerique = propositionEstNumerique(proposition);
             while(proposition.matches("-?[0-9]+") == false){
                 System.out.println("Votre proposition n'est pas numérique!");
+                logger.debug("la proposition n'est pas numerique");
                 proposition = sc.next();
             }
         }
+        logger.info("En fonction du type de joueur on demande à l'utilisateur soit de donner une combinaison à trouver par l'ordinateur ou on lui demande une proposition de réponse, " + proposition);
         return proposition;
     }
 
     @Override
     public String genererCombinaisonReponseOrdinateur(String reponse, String proposition) {
+        logger.debug("Lancement de la methode genererCombinaisonReponseOrdinateur()");
             int position;
             String propositionReponse = "";
         for (int i = 0;i<proposition.length();i++){
@@ -164,11 +186,13 @@ public class Mastermind extends Jeu{
                 propositionReponse = propositionReponse + proposition.charAt(i);
             }
         }
+        logger.info("On génère une combinaison réponse pour l'ordinateur : " + propositionReponse);
         return propositionReponse;
     }
 
     @Override
     public String genererCombinaisonOrdinateur(int difficulte) {
+        logger.debug("Lancement de la methode genererCombinaisonOrdinateur()");
         proposition = "";
         switch(choixNumAlpha){
             case "numerique":
@@ -182,6 +206,7 @@ public class Mastermind extends Jeu{
                 }
                 break;
         }
+        logger.info("on génère une combinaison à trouver par le joueur : " + proposition);
         return proposition;
     }
 

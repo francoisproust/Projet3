@@ -4,7 +4,8 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.io.IOException;
 import java.io.FileInputStream;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class RecupererProperties {
     private int nombreCases;
@@ -14,21 +15,22 @@ public class RecupererProperties {
     private String numerique;
     private String alphabetique;
     private String choixNumAlpha;
-
+    private static Logger logger = LogManager.getLogger(RecupererProperties.class);
 
     /**
      * Récupération des properties pour le jeu recherche +/-
      */
     public void configurationRecherche(){
+        logger.debug("Lancement de la methode configurationRecherche()");
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/java/ressources/config.properties");
+            input = new FileInputStream("src/main/ressources/config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("recherche.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("recherche.nbEssais"));
             this.debug = prop.getProperty("recherche.debug");
-
+            logger.debug("On récupère les propriétés suivantes: nombre de cases " + nombreCases + " ,  nombre d'essais " + nbEssai + " , mode debug (true or null) " + debug);
         }catch (IOException ex) {
             ex.printStackTrace();
         } finally {
@@ -46,15 +48,16 @@ public class RecupererProperties {
      * Récupération des properties pour le jeu Mastermind
      */
     public void configurationMastermind(){
+        logger.debug("Lancement de la methode configurationMastermind()");
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/java/ressources/config.properties");
+            input = new FileInputStream("src/main/ressources/config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("mastermind.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("mastermind.nbEssais"));
             this.debug = prop.getProperty("mastermind.debug");
-
+            logger.debug("On récupère les propriétés suivantes: nombre de cases " + nombreCases + " ,  nombre d'essais " + nbEssai + " , mode debug (true or null) " + debug);
         }catch (IOException ex) {
             ex.printStackTrace();
         } finally {
@@ -75,15 +78,17 @@ public class RecupererProperties {
      *  si l'on prend des valeurs numériques ou alphabétiques
      */
     public void configurationSpecifiqueMastermind(){
+        logger.debug("Lancement de la methode configurationSpecifiqueMastermind()");
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/java/ressources/config.properties");
+            input = new FileInputStream("src/main/ressources/config.properties");
             prop.load(input);
             this.nombreUtilisable = Integer.parseInt(prop.getProperty("mastermind.nombreUtilisable"));
             this.numerique = prop.getProperty("mastermind.numerique");
             this.alphabetique = prop.getProperty("mastermind.alphabetique");
             this.choixNumAlpha = prop.getProperty("mastermind.choixNumAlpha");
+            logger.debug("On récupère les propriétés spécifiques suivantes : nombre utilisables " + nombreUtilisable + " , liste de nombre numerique " + numerique + " , liste de lettres " + alphabetique + " , choix numerique ou alphabetique " + choixNumAlpha);
         }catch (IOException ex) {
             ex.printStackTrace();
         } finally {

@@ -2,6 +2,8 @@ package fonctionnement;
 
 import jeu.Mastermind;
 import jeu.RecherchePlusMoins;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Deroulement {
     private String choixJeu;
@@ -10,10 +12,13 @@ public class Deroulement {
     private int difficulte;
     private int rejeu;
 
+    private static final Logger logger = LogManager.getLogger(Deroulement.class);
+
     /**
      * Déroulement du jeu
      */
     public void start() {
+        logger.debug("Lancement de la methode start()");
         lancerMenu();
         lancerJeu();
         AffichageChoix rejouer = new AffichageChoix();
@@ -38,6 +43,7 @@ public class Deroulement {
      * Methode permettant de récupérer le choix du jeu ainsi que son mode de jeu
      */
     private void lancerMenu(){
+        logger.debug("Lancement de la methode lancerMenu()");
         AffichageChoix lancementAffichage = new AffichageChoix();
         choixJeu = lancementAffichage.lancementJeu();
         modeJeu = lancementAffichage.modeJeu();
@@ -47,18 +53,22 @@ public class Deroulement {
      * Lance le jeu souhaité ainsi que le mode demandé
      */
     private void lancerJeu(){
+        logger.debug("Lancement de la methode lancerJeu()");
         RecupererProperties properties = new RecupererProperties();
         if (choixJeu.equals(Outils.RECHERCHE)) {
             properties.configurationRecherche();
             RecherchePlusMoins partie = new RecherchePlusMoins(properties.getNbEssai(), properties.getNombreCases(), modeJeu, properties.getDebug());
             switch (modeJeu){
                 case "challengeur":
+                    logger.info("Lancement du jeu " + Outils.RECHERCHE + " en mode " + modeJeu );
                     partie.challengeur();
                     break;
                 case "defenseur":
+                    logger.info("Lancement du jeu " + Outils.RECHERCHE + " en mode " + modeJeu );
                     partie.defenseur();
                     break;
                 case "duel":
+                    logger.info("Lancement du jeu " + Outils.RECHERCHE + " en mode " + modeJeu );
                     partie.duel();
                     break;
             }
@@ -67,12 +77,15 @@ public class Deroulement {
             Mastermind partie = new Mastermind(properties.getNbEssai(), properties.getNombreCases(),modeJeu, properties.getDebug());
             switch (modeJeu){
                 case "challengeur":
+                    logger.info("Lancement du jeu " + Outils.MASTERMIND + " en mode " + modeJeu );
                     partie.challengeur();
                     break;
                 case "defenseur":
+                    logger.info("Lancement du jeu " + Outils.MASTERMIND + " en mode " + modeJeu );
                     partie.defenseur();
                     break;
                 case "duel":
+                    logger.info("Lancement du jeu " + Outils.MASTERMIND + " en mode " + modeJeu );
                     partie.duel();
                     break;
             }

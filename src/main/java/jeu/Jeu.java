@@ -1,11 +1,15 @@
 package jeu;
+import fonctionnement.RecupererProperties;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public abstract class Jeu {
     private int nbEssai;
     private int difficulte;
     private String modeJeu;
     private String debug;
-
+    private int nbCoup;
+    private static Logger logger = LogManager.getLogger(Jeu.class);
     /**
      * Constructeur permettant la création du Jeu
      * @param nbEssai nombre d'essai pour trouver la possibilité
@@ -39,7 +43,7 @@ public abstract class Jeu {
     /**
      * génère une combinaison en fonction de la difficulté demandé
      * @param difficulte nombre de caractère de la combinaison à trouver
-     * @return
+     * @return combinaison généré
      */
     public abstract String genererCombinaison(int difficulte);
 
@@ -72,23 +76,31 @@ public abstract class Jeu {
      * @param combinaison généré automatiquement en fonction de la difficulté
      */
     protected void deroulementJeuModeChallengeur(String combinaison){
+        logger.debug("Lancement de la methode deroulementJeuModeChallengeur()");
         boolean egalite = false;
         String proposition;
         String reponse ="";
+        nbCoup = 0;
         if (debug.equals("true")){
             System.out.println("La solution est : " + combinaison);
+            logger.debug("Le mode debug est à true, nous affichons la solution");
         }
         while(nbEssai >0 && egalite == false){
             proposition = proposition("");
+            nbCoup =  nbCoup + 1;
             if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo, la solution a été trouvé en " + nbEssai + " coups");
+                logger.info("L'utilisateur a trouvé la combinaison en " + nbCoup + " coups");
+                System.out.println("Bravo, la solution a été trouvé en " + nbCoup + " coups");
                 break;
             }else{
                 reponse = reponse(combinaison,proposition,"humain");
+                logger.info("Proposition : " + proposition + " -> Réponse : " + reponse);
                 System.out.println("Proposition : " + proposition + " -> Réponse : " + reponse);
                 nbEssai = nbEssai - 1;
+                logger.info("il reste " + nbEssai + " essais");
             }
             if(nbEssai== 0){
+                logger.info("Vous avez perdu, la solution était : " + combinaison);
                 System.out.println("Vous avez perdu, la solution était : " + combinaison);
             }
         }
@@ -99,21 +111,29 @@ public abstract class Jeu {
      * @param combinaison démandé au préalable à l utilisateur
      */
     protected void deroulementJeuModeDefenseur(String combinaison){
+        logger.debug("Lancement de la methode deroulementJeuModeDefenseur()");
         boolean egalite = false;
         String reponse ="";
+        nbCoup =  0;
         String proposition = genererCombinaisonOrdinateur(difficulte);
         while(nbEssai >0 && egalite == false){
+            nbCoup =  nbCoup + 1;
             if(egalite(combinaison,proposition) == true){
-                System.out.println("Bravo, la solution a été trouvé en " + nbEssai + " coups");
+                logger.info("L'utilisateur a trouvé la combinaison en " + nbCoup + " coups");
+                System.out.println("Bravo, la solution a été trouvé en " + nbCoup + " coups");
                 break;
             }else{
                 reponse = reponse(combinaison,proposition,"ordinateur");
+                logger.debug("a partir de la combinaison à trouver et de la proposition de l'ordinateur, on fournit un réponse pour générer la prochaine proposition : " +reponse);
                 proposition = genererCombinaisonReponseOrdinateur(reponse, proposition);
+                logger.debug("a parir de la réponse et de la proposition faite on génère une nouvelle proposition : " + proposition);
                 nbEssai = nbEssai - 1;
+                logger.debug("on retire un essai sur le nombre de coup, il en reste : " + nbEssai);
                 reponse = "";
             }
         }
         if(nbEssai== 0){
+            logger.info("L'ordinateur n'as pas trouvé la bonne combinaison");
             System.out.println("L'ordinateur n'as pas trouvé la bonne combinaison");
         }
     }
@@ -122,33 +142,43 @@ public abstract class Jeu {
      * Déroulement du jeu en mode duel
      */
     protected void deroulementJeuModeDuel(){
+        logger.debug("Lancement de la methode deroulementJeuModeDefenseur()");
         String combinaisonPourJoueur = genererCombinaison(difficulte);
         String combinaisonPourOrdinateur = proposition("ordinateur");
         String propositionOrdinateur = genererCombinaisonOrdinateur(difficulte);
+        nbCoup =  0;
         while(nbEssai >0){
+            nbCoup =  nbCoup + 1;
             // partie ou le joueur cherche la combinaison
             String propositionJoueur = proposition("");
             if(egalite(combinaisonPourJoueur,propositionJoueur) == true){
-                System.out.println("Bravo vous avez trouvé la solution");
+                System.out.println("Bravo, la solution a été trouvé en " + nbCoup + " coups");
+                logger.info("Le joueur a trouvé la solution en " + nbCoup + " coups");
                 break;
             }else{
                 String reponseJoueur = reponse(combinaisonPourJoueur,propositionJoueur,"humain");
+                logger.info("on fournit une réponse au joueur en fonction de la combinaison à trouver et sa proposition " + reponseJoueur);
                 System.out.println("Proposition : " + propositionJoueur + " -> Réponse : " + reponseJoueur);
             }
             // partie ou c est l'ordinateur qui cherche la combinaison
             if(egalite(combinaisonPourOrdinateur,propositionOrdinateur) == true){
-                System.out.println("L'ordinateur a trouvé la solution");
+                System.out.println("L'ordinateur a été trouvé en " + nbCoup + " coups");
+                logger.info("L'ordinateur a trouvé la solution en " + nbCoup + " coups");
                 break;
             }else{
                 String reponseOrdinateur = reponse(combinaisonPourOrdinateur,propositionOrdinateur,"ordinateur");
+                logger.info("on fournit une réponse pour l'ordinateur en fonction de la combinaison à trouver et sa proposition " + reponseOrdinateur);
                 propositionOrdinateur = genererCombinaisonReponseOrdinateur(reponseOrdinateur, propositionOrdinateur);
+                logger.info("on génère une nouvelle proposition pour l'ordinateur : " + propositionOrdinateur);
                 reponseOrdinateur = "";
             }
             nbEssai = nbEssai - 1;
+            logger.info("il reste " + nbEssai + " essais");
         }
         if(nbEssai== 0){
             System.out.println("Vous avez perdu tous les deux");
             System.out.println("La solution pour le joueur etait : " + combinaisonPourJoueur);
+            logger.info("le joueur et l'ordinateur ont perdu, la combinaison à trouver pour le joueur etait : " + combinaisonPourJoueur);
         }
     }
 

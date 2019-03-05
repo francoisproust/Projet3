@@ -1,13 +1,15 @@
 package fonctionnement;
 
 import java.util.Scanner;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class AffichageChoix {
 
     Scanner sc = new Scanner(System.in);
     private String jeu;
     private String mode;
-
+    private static Logger logger = LogManager.getLogger(AffichageChoix.class);
     /**
      * Méthode permettant la sélection du jeu souhaité
      * @return le nom du jeu
@@ -18,14 +20,18 @@ public class AffichageChoix {
         System.out.println("1 : Recherche +/-");
         System.out.println("2 : Mastermind");
         saisie = sc.nextInt();
+        logger.debug("Lancement de la méthode lancementJeu()");
+        logger.info("L'utilisateur choisi le jeu entre Recherche +/- et Mastermind");
         while (saisie != 1 && saisie != 2){
             System.out.println("Le choix ne correspond pas à ce qui est proposé");
             saisie = sc.nextInt();
         }
         if (saisie == 1){
             jeu = Outils.RECHERCHE;
+            logger.info("L'utilisateur a choisi le jeu Recherche +/-");
         }else{
             jeu = Outils.MASTERMIND;
+            logger.info("L'utilisateur a choisi le jeu Mastermind");
         }
         return jeu;
     }
@@ -41,15 +47,20 @@ public class AffichageChoix {
         System.out.println("2 : defenseur");
         System.out.println("3 : duel");
         saisie = recupererSaisie();
+        logger.debug("Lancement de la méthode modeJeu()");
+        logger.info("Choix du mode de jeu Challengeur / Defenseur / Duel");
         switch (saisie){
             case 1:
                 mode = Outils.CHALLENGEUR;
+                logger.info("L'utilisateur a choisi le mode challengeur");
                 break;
             case 2:
                 mode = Outils.DEFENSEUR;
+                logger.info("L'utilisateur a choisi le mode defenseur");
                 break;
             case 3:
                 mode = Outils.DUEL;
+                logger.info("L'utilisateur a choisi le mode duel");
                 break;
         }
         return mode;
@@ -66,6 +77,8 @@ public class AffichageChoix {
         System.out.println("2 : Lancer un autre jeu");
         System.out.println("3 : Quitter l'application");
         choix = recupererSaisie();
+        logger.debug("Lancement de la méthode finDePartie()");
+        logger.info("En fin de partie, on invite le joueur a choisir ce qu'il souhaite faire Rejouer au meme jeu(1) / Lancer un autre jeu(2) / quitter l'application(3) " + choix);
         return choix;
     }
 
@@ -79,6 +92,8 @@ public class AffichageChoix {
         while (saisie != 1 && saisie != 2 && saisie != 3){
             System.out.println("Le choix ne correspond pas à ce qui est proposé");
             saisie = sc.nextInt();
+            logger.debug("Lancement de la méthode recupererSaisie()");
+            logger.debug("L'utilisateur a fait un choix non disponible");
         }
         return saisie;
     }
