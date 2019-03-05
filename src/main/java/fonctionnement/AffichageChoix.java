@@ -4,12 +4,12 @@ import java.util.Scanner;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-public class AffichageChoix {
+@SuppressWarnings("ALL")
+class AffichageChoix {
 
-    Scanner sc = new Scanner(System.in);
-    private String jeu;
+    private final Scanner sc = new Scanner(System.in);
     private String mode;
-    private static Logger logger = LogManager.getLogger(AffichageChoix.class);
+    private static final Logger logger = LogManager.getLogger(AffichageChoix.class);
     /**
      * Méthode permettant la sélection du jeu souhaité
      * @return le nom du jeu
@@ -26,6 +26,7 @@ public class AffichageChoix {
             System.out.println("Le choix ne correspond pas à ce qui est proposé");
             saisie = sc.nextInt();
         }
+        String jeu;
         if (saisie == 1){
             jeu = Outils.RECHERCHE;
             logger.info("L'utilisateur a choisi le jeu Recherche +/-");

@@ -15,7 +15,7 @@ public class RecupererProperties {
     private String numerique;
     private String alphabetique;
     private String choixNumAlpha;
-    private static Logger logger = LogManager.getLogger(RecupererProperties.class);
+    private static final Logger logger = LogManager.getLogger(RecupererProperties.class);
 
     /**
      * Récupération des properties pour le jeu recherche +/-

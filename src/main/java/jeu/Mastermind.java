@@ -5,20 +5,19 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
 
+@SuppressWarnings({"ALL", "SpellCheckingInspection"})
 public class Mastermind extends Jeu{
-    Scanner sc = new Scanner(System.in);
-    String combinaison;
-    String proposition;
+    private final Scanner sc = new Scanner(System.in);
+    private String combinaison;
+    private String proposition;
     boolean egalite;
-    String reponse = "";
+    private String reponse = "";
     private int nombreUtilisable;
     private String numerique;
     private String alphabetique;
     private String choixNumAlpha;
-    private int bienPlace = 0;
-    private int present = 0;
-    String plageUtilisation;
-    private static Logger logger = LogManager.getLogger(Mastermind.class);
+    private String plageUtilisation;
+    private static final Logger logger = LogManager.getLogger(Mastermind.class);
 
     public Mastermind(int nbEssai, int difficulte, String modeJeu, String debug) {
         super(nbEssai, difficulte, modeJeu, debug);
@@ -55,14 +54,14 @@ public class Mastermind extends Jeu{
         if (this.getChoixNumAlpha().equals("numerique")) {
             int nombreUtilisable = this.nombreUtilisable;
             for (int i = 0; i < difficulte; i++) {
-                int nombre = (int) (Math.random() * (nombreUtilisable - 0));
+                int nombre = (int) (Math.random() * (nombreUtilisable));
                 combinaison = combinaison + nombre;
             }
             logger.info("La combinaison obtenue est numerique et est égale à : " + combinaison);
         }else if(this.getChoixNumAlpha().equals("alphabetique")) {
             int nombreUtilisable = this.nombreUtilisable;
             for (int i = 0; i < difficulte; i++) {
-                int nombre = (int) (Math.random() * (nombreUtilisable - 0));
+                int nombre = (int) (Math.random() * (nombreUtilisable));
                 combinaison = combinaison + this.alphabetique.charAt(nombre);
             }
             logger.info("La combinaison obtenue est alphabétique et est égale à : " + combinaison);
@@ -85,8 +84,8 @@ public class Mastermind extends Jeu{
     public String reponse(String combinaison, String proposition,String joueur) {
         logger.debug("Lancement de la methode reponse()");
         logger.info("Générer une réponse en fonction de la proposition faite et de la combinaison à trouver");
-        bienPlace = 0;
-        present = 0;
+        int bienPlace = 0;
+        int present = 0;
         int caractereCombinaison;
         int caractereProposition;
         if (choixNumAlpha.equals("alphabetique")) {
@@ -246,7 +245,7 @@ public class Mastermind extends Jeu{
         this.alphabetique = alphabetique;
     }
 
-    public String getChoixNumAlpha() {
+    private String getChoixNumAlpha() {
         return choixNumAlpha;
     }
 

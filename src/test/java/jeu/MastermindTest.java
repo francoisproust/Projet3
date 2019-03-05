@@ -3,6 +3,7 @@ package jeu;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class MastermindTest {
     @Test
     public void CombinaisonUnBienPlaceUnPresentNumerique(){
@@ -26,7 +27,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("alphabetique");
         jeu.setNombreUtilisable(4);
         jeu.setAlphabetique("ABCDEFGHIJ");
-        assertEquals(true,jeu.egalite("ABC","ABC"));
+        assertTrue(jeu.egalite("ABC", "ABC"));
     }
     @Test
     public void combinaisonIdentiqueNumerique(){
@@ -34,7 +35,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("numerique");
         jeu.setNombreUtilisable(4);
         jeu.setNumerique("0123456789");
-        assertEquals(true,jeu.egalite("123","123"));
+        assertTrue(jeu.egalite("123", "123"));
     }
     @Test
     public void combinaisonDifferenteNumerique(){
@@ -42,7 +43,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("numerique");
         jeu.setNombreUtilisable(4);
         jeu.setNumerique("0123456789");
-        assertEquals(false,jeu.egalite("255","123"));
+        assertFalse(jeu.egalite("255", "123"));
     }
     @Test
     public void combinaisonDifferenteAlphabetique(){
@@ -50,7 +51,7 @@ public class MastermindTest {
         jeu.setChoixNumAlpha("alphabetique");
         jeu.setNombreUtilisable(4);
         jeu.setAlphabetique("ABCDEFGHIJ");
-        assertEquals(false,jeu.egalite("ABC","CBA"));
+        assertFalse(jeu.egalite("ABC", "CBA"));
     }
     @Test
     public void genererCombinaisonNumerique(){

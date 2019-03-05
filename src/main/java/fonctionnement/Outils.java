@@ -1,10 +1,10 @@
 package fonctionnement;
 
-public class Outils {
-    static String RECHERCHE = "Recherche";
-    static String MASTERMIND = "mastermind";
-    static String DUEL = "duel";
-    static String CHALLENGEUR = "challengeur";
-    static String DEFENSEUR = "defenseur";
+class Outils {
+    static final String RECHERCHE = "Recherche";
+    static final String MASTERMIND = "mastermind";
+    static final String DUEL = "duel";
+    static final String CHALLENGEUR = "challengeur";
+    static final String DEFENSEUR = "defenseur";
 
 }

@@ -27,12 +27,12 @@ public class RecherchePlusMoinsTest {
     @Test
     public void combinaisonIdentique(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals(true,jeu.egalite("123","123"));
+        assertTrue(jeu.egalite("123", "123"));
     }
     @Test
     public void combinaisonDifferente(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");
-        assertEquals(false,jeu.egalite("255","123"));
+        assertFalse(jeu.egalite("255", "123"));
     }
     @Test
     public void genererPremierePropositionOrdinateur(){

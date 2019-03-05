@@ -1,15 +1,15 @@
 package jeu;
-import fonctionnement.RecupererProperties;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-public abstract class Jeu {
+@SuppressWarnings("ALL")
+abstract class Jeu {
     private int nbEssai;
     private int difficulte;
     private String modeJeu;
     private String debug;
     private int nbCoup;
-    private static Logger logger = LogManager.getLogger(Jeu.class);
+    private static final Logger logger = LogManager.getLogger(Jeu.class);
     /**
      * Constructeur permettant la création du Jeu
      * @param nbEssai nombre d'essai pour trouver la possibilité
@@ -17,7 +17,7 @@ public abstract class Jeu {
      * @param modeJeu mode de jeu utilisé (Defenseur, Challengeur, Duel)
      * @param debug mode debug affichant la combinaison à trouver
      */
-    public Jeu(int nbEssai,int difficulte, String modeJeu, String debug){
+    Jeu(int nbEssai, int difficulte, String modeJeu, String debug){
         this.difficulte = difficulte;
         this.nbEssai = nbEssai;
         this.modeJeu = modeJeu;
@@ -45,7 +45,7 @@ public abstract class Jeu {
      * @param difficulte nombre de caractère de la combinaison à trouver
      * @return combinaison généré
      */
-    public abstract String genererCombinaison(int difficulte);
+    protected abstract String genererCombinaison(int difficulte);
 
     /**
      * Teste l'égalité entre deux propositions
@@ -53,7 +53,7 @@ public abstract class Jeu {
      * @param proposition proposition faite par le joueur ou l'ordinateur
      * @return boolean
      */
-    public abstract boolean egalite(String combinaison, String proposition);
+    protected abstract boolean egalite(String combinaison, String proposition);
 
     /**
      * génère une réponse en fonction de la combinaison à trouver, de la proposition faite et du type de joueur
@@ -62,23 +62,25 @@ public abstract class Jeu {
      * @param joueur ordinateur / humain
      * @return reponse pour affiner son résultat
      */
-    public abstract String reponse(String combinaison, String proposition,String joueur);
+    protected abstract String reponse(String combinaison, String proposition, String joueur);
 
     /**
      * génère une première combinaison de solution pour l'ordinateur
      * @param difficulte nombre de caractères de la combinaison à trouver
      * @return proposition de combinaison initiale (au milieu des possibilités)
      */
-    public abstract String genererCombinaisonOrdinateur(int difficulte);
+    protected abstract String genererCombinaisonOrdinateur(int difficulte);
 
     /**
      * Déroulement du mode Challengeur
      * @param combinaison généré automatiquement en fonction de la difficulté
      */
-    protected void deroulementJeuModeChallengeur(String combinaison){
+    @SuppressWarnings("UnusedAssignment")
+    void deroulementJeuModeChallengeur(String combinaison){
         logger.debug("Lancement de la methode deroulementJeuModeChallengeur()");
         boolean egalite = false;
         String proposition;
+        //noinspection UnusedAssignment
         String reponse ="";
         nbCoup = 0;
         if (debug.equals("true")){
@@ -110,7 +112,7 @@ public abstract class Jeu {
      * déroulement du jeu en mode Défenseur
      * @param combinaison démandé au préalable à l utilisateur
      */
-    protected void deroulementJeuModeDefenseur(String combinaison){
+    void deroulementJeuModeDefenseur(String combinaison){
         logger.debug("Lancement de la methode deroulementJeuModeDefenseur()");
         boolean egalite = false;
         String reponse ="";
@@ -141,7 +143,8 @@ public abstract class Jeu {
     /**
      * Déroulement du jeu en mode duel
      */
-    protected void deroulementJeuModeDuel(){
+    @SuppressWarnings("UnusedAssignment")
+    void deroulementJeuModeDuel(){
         logger.debug("Lancement de la methode deroulementJeuModeDefenseur()");
         String combinaisonPourJoueur = genererCombinaison(difficulte);
         String combinaisonPourOrdinateur = proposition("ordinateur");
@@ -198,7 +201,7 @@ public abstract class Jeu {
         this.nbEssai = nbEssai;
     }
 
-    public int getDifficulte() {
+    int getDifficulte() {
         return difficulte;
     }
 
@@ -210,7 +213,7 @@ public abstract class Jeu {
         this.debug = debug;
     }
 
-    public abstract String proposition(String joueur);
+    protected abstract String proposition(String joueur);
 
     public String getModeJeu() {
         return modeJeu;

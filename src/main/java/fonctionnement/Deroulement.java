@@ -5,12 +5,12 @@ import jeu.RecherchePlusMoins;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+@SuppressWarnings("ALL")
 public class Deroulement {
     private String choixJeu;
     private String modeJeu;
     private int nbEssai;
     private int difficulte;
-    private int rejeu;
 
     private static final Logger logger = LogManager.getLogger(Deroulement.class);
 
@@ -22,7 +22,7 @@ public class Deroulement {
         lancerMenu();
         lancerJeu();
         AffichageChoix rejouer = new AffichageChoix();
-        rejeu = rejouer.finDePartie();
+        int rejeu = rejouer.finDePartie();
         while(rejeu == 1 || rejeu == 2){
             switch (rejeu){
                 case 1:

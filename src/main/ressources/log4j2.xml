@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <File name="File" fileName="jeu-projet3.log" bufferedIO="true" advertiseURI="file://games.log" advertise="true">
+        <File name="File" fileName="jeu-projet3.log" bufferedIO="true" advertiseURI="file://jeu.log" advertise="true">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [games] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>

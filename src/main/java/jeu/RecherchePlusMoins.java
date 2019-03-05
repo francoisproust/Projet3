@@ -1,17 +1,17 @@
 package jeu;
 
-import java.util.Random;
 import java.util.Scanner;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+@SuppressWarnings({"ALL", "StringConcatenationInLoop", "PointlessBooleanExpression"})
 public class RecherchePlusMoins extends Jeu{
-    Scanner sc = new Scanner(System.in);
-    String combinaison;
-    String proposition;
+    private final Scanner sc = new Scanner(System.in);
+    private String combinaison;
+    private String proposition;
     boolean egalite;
-    String reponse = "";
-    private static Logger logger = LogManager.getLogger(RecherchePlusMoins.class);
+    private String reponse = "";
+    private static final Logger logger = LogManager.getLogger(RecherchePlusMoins.class);
     public RecherchePlusMoins(int nbEssai, int difficulte, String modeJeu,String debug) {
         super(nbEssai, difficulte,modeJeu, debug);
     }
@@ -37,6 +37,7 @@ public class RecherchePlusMoins extends Jeu{
         deroulementJeuModeDuel();
     }
 
+    @SuppressWarnings("PointlessArithmeticExpression")
     @Override
     public String genererCombinaison(int difficulte) {
         logger.debug("Lancement de la methode genererCombinaison()");
@@ -59,6 +60,7 @@ public class RecherchePlusMoins extends Jeu{
             return egalite = true;
         }else{
             logger.info("La combinaison et la proposition sont différentes");
+            //noinspection UnusedAssignment
             return egalite = false;
         }
     }
@@ -150,5 +152,5 @@ public class RecherchePlusMoins extends Jeu{
         }
         logger.info("On génère la proposition de l'ordinateur en fonction de la réponse faite soit la proposition suivante : " + nouvelleReponse);
         return nouvelleReponse;
-    };
+    }
 }
