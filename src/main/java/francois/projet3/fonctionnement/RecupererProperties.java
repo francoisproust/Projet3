@@ -26,8 +26,9 @@ public class RecupererProperties {
         logger.debug("Lancement de la methode configurationRecherche()");
         Properties prop = new Properties();
         InputStream input = null;
+        ClassLoader Loader = Thread.currentThread().getContextClassLoader();
         try{
-            input = new FileInputStream("src/main/resources/config.properties");
+            input = Loader.getResourceAsStream ("config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("recherche.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("recherche.nbEssais"));
@@ -53,8 +54,9 @@ public class RecupererProperties {
         logger.debug("Lancement de la methode configurationMastermind()");
         Properties prop = new Properties();
         InputStream input = null;
+        ClassLoader Loader = Thread.currentThread().getContextClassLoader();
         try{
-            input = new FileInputStream("src/main/resources/config.properties");
+            input = Loader.getResourceAsStream ("config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("mastermind.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("mastermind.nbEssais"));
@@ -83,8 +85,9 @@ public class RecupererProperties {
         logger.debug("Lancement de la methode configurationSpecifiqueMastermind()");
         Properties prop = new Properties();
         InputStream input = null;
+        ClassLoader Loader = Thread.currentThread().getContextClassLoader();
         try{
-            input = new FileInputStream("src/main/resources/config.properties");
+            input = Loader.getResourceAsStream ("config.properties");
             prop.load(input);
             this.nombreUtilisable = Integer.parseInt(prop.getProperty("mastermind.nombreUtilisable"));
             this.numerique = prop.getProperty("mastermind.numerique");
