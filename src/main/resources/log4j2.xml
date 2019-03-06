@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="warn">
+    <Properties>
+        <!--<Property name="filename">target/jeu-projet3.log</Property>-->
+        <Property name="filename">jeu-projet3.log</Property>
+    </Properties>
     <Appenders>
-        <File name="File" fileName="jeu-projet3.log" bufferedIO="true" advertiseURI="file://jeu.log" advertise="true">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [games] %-5level %logger{36} - %msg%n"/>
+        <File name="File" fileName="${filename}">
+            <PatternLayout>
+                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+            </PatternLayout>
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="francois.projet3.Main" additivity="false" >
-            <AppenderRef ref="File" />
-        </Logger>
-        <Root level="INFO">
+        <Root level="info">
+            <AppenderRef ref="File"/>
         </Root>
     </Loggers>
 </Configuration>
