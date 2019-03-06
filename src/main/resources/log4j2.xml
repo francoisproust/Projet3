@@ -6,8 +6,10 @@
         </File>
     </Appenders>
     <Loggers>
+        <Logger name="francois.projet3.Main" additivity="false" >
+            <AppenderRef ref="File" />
+        </Logger>
         <Root level="INFO">
-            <AppenderRef ref="File"/>
         </Root>
     </Loggers>
 </Configuration>

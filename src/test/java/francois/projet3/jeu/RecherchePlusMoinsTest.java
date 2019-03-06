@@ -1,9 +1,10 @@
-package jeu;
+package francois.projet3.jeu;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RecherchePlusMoinsTest {
+
     @Test
     public void propositionSuperieurCombinaison(){
         RecherchePlusMoins jeu = new RecherchePlusMoins(1,1,"","");

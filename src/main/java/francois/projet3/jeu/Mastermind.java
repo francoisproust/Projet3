@@ -1,11 +1,12 @@
-package jeu;
+package francois.projet3.jeu;
 
-import fonctionnement.RecupererProperties;
-import org.apache.logging.log4j.Logger;
+import francois.projet3.fonctionnement.RecupererProperties;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Scanner;
 
-@SuppressWarnings({"ALL", "SpellCheckingInspection"})
+
 public class Mastermind extends Jeu{
     private final Scanner sc = new Scanner(System.in);
     private String combinaison;

@@ -1,10 +1,10 @@
-package jeu;
+package francois.projet3.jeu;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Scanner;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
-@SuppressWarnings({"ALL", "StringConcatenationInLoop", "PointlessBooleanExpression"})
 public class RecherchePlusMoins extends Jeu{
     private final Scanner sc = new Scanner(System.in);
     private String combinaison;

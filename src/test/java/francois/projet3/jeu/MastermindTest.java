@@ -1,10 +1,11 @@
-package jeu;
+package francois.projet3.jeu;
+
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class MastermindTest {
+
     @Test
     public void CombinaisonUnBienPlaceUnPresentNumerique(){
         Mastermind jeu = new Mastermind(2,3,"","");

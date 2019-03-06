@@ -1,11 +1,12 @@
-package fonctionnement;
+package francois.projet3.fonctionnement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.io.IOException;
-import java.io.FileInputStream;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class RecupererProperties {
     private int nombreCases;
@@ -17,6 +18,7 @@ public class RecupererProperties {
     private String choixNumAlpha;
     private static final Logger logger = LogManager.getLogger(RecupererProperties.class);
 
+    public RecupererProperties(){};
     /**
      * Récupération des properties pour le jeu recherche +/-
      */
@@ -25,7 +27,7 @@ public class RecupererProperties {
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/ressources/config.properties");
+            input = new FileInputStream("src/main/resources/config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("recherche.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("recherche.nbEssais"));
@@ -52,7 +54,7 @@ public class RecupererProperties {
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/ressources/config.properties");
+            input = new FileInputStream("src/main/resources/config.properties");
             prop.load(input);
             this.nombreCases = Integer.valueOf(prop.getProperty("mastermind.nombreCases"));
             this.nbEssai = Integer.valueOf(prop.getProperty("mastermind.nbEssais"));
@@ -82,7 +84,7 @@ public class RecupererProperties {
         Properties prop = new Properties();
         InputStream input = null;
         try{
-            input = new FileInputStream("src/main/ressources/config.properties");
+            input = new FileInputStream("src/main/resources/config.properties");
             prop.load(input);
             this.nombreUtilisable = Integer.parseInt(prop.getProperty("mastermind.nombreUtilisable"));
             this.numerique = prop.getProperty("mastermind.numerique");

@@ -1,8 +1,8 @@
-package jeu;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+package francois.projet3.jeu;
 
-@SuppressWarnings("ALL")
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 abstract class Jeu {
     private int nbEssai;
     private int difficulte;
