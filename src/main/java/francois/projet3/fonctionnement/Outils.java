@@ -1,4 +1,4 @@
-package fonctionnement;
+package francois.projet3.fonctionnement;
 
 class Outils {
     static final String RECHERCHE = "Recherche";

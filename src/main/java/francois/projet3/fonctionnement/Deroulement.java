@@ -1,11 +1,10 @@
-package fonctionnement;
+package francois.projet3.fonctionnement;
 
-import jeu.Mastermind;
-import jeu.RecherchePlusMoins;
-import org.apache.logging.log4j.Logger;
+import francois.projet3.jeu.Mastermind;
+import francois.projet3.jeu.RecherchePlusMoins;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("ALL")
 public class Deroulement {
     private String choixJeu;
     private String modeJeu;
